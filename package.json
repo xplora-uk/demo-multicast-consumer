@@ -1,0 +1,46 @@
+{
+  "name": "multicast-consumer-demo",
+  "version": "1.0.0",
+  "description": "demo for a multicast message consumer",
+  "main": "build/index.js",
+  "scripts": {
+    "build:ts": "tsc -b ./tsconfig.build.json",
+    "build": "npm run clean && npm run build:ts",
+    "clean": "rimraf build",
+    "start:dev": "ts-node ./src/index.ts",
+    "start": "node .",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XploraTechnologiesAS/multicast-consumer-demo.git"
+  },
+  "keywords": [
+    "multicast",
+    "exchange",
+    "message",
+    "consumer",
+    "worker",
+    "listener"
+  ],
+  "author": "Haci Murat Yaman",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/XploraTechnologiesAS/multicast-consumer-demo/issues"
+  },
+  "homepage": "https://github.com/XploraTechnologiesAS/multicast-consumer-demo#readme",
+  "devDependencies": {
+    "@types/amqplib": "^0.10.0",
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.13",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "amqp-connection-manager": "^4.1.9",
+    "amqplib": "^0.10.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
