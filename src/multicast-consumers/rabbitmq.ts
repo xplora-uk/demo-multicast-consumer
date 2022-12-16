@@ -3,6 +3,12 @@ import { IAmqpConnectionManager } from 'amqp-connection-manager/dist/esm/AmqpCon
 import { ConsumeMessage } from 'amqplib';
 import { IMulticastConsumeOutput, IMulticastConsumer, IMulticastConsumerConf, IStartMulticastConsumingInput, IStartMulticastConsumingOutput } from '../types';
 
+const connectionOptions = {
+  timeout: 5000,
+  heartbeatIntervalInSeconds: 15, // default is 5
+  reconnectTimeInSeconds: 15, // defaults to heartbeatIntervalInSeconds
+};
+
 const channelOptions = {
   publishTimeout: 10000,
 };
@@ -16,6 +22,7 @@ const exchangeOptions = { durable: true };
 // nil string => create new queue with a random name
 const queueName = '';
 
+// no filter
 const pattern = '';
 
 // this random queue is not durable and exclusive for this consumer
@@ -106,18 +113,6 @@ class RabbitMqMulticastConsumer implements IMulticastConsumer {
 }
 
 export function newRabbitMqMulticastConsumer(settings: IMulticastConsumerConf): Promise<IMulticastConsumer> {
-
-
-
-
-  const connection = amqp.connect(
-    {
-      ...settings,
-      connectionOptions: {
-        timeout: 5000,
-      },
-    },
-  );
-
+  const connection = amqp.connect({ ...settings, connectionOptions });
   return Promise.resolve(new RabbitMqMulticastConsumer(connection));
 }
